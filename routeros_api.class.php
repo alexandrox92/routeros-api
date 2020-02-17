@@ -119,7 +119,7 @@ class RouterosAPI
                                 if ($MATCHES[0][0] == 'ret' && strlen($MATCHES[0][1]) == 32) {
                                     $this->write('/login', false);
                                     $this->write('=name=' . $login, false);
-                                    $this->write('=response=00' . md5(chr(0) . $password . pack('H*', $MATCHES[0][1])));
+                                    $this->write('=password=' . $password); // password Compatibility with versions higher than 6.43
                                     $RESPONSE = $this->read(false);
                                     if (isset($RESPONSE[0]) && $RESPONSE[0] == '!done') {
                                         $this->connected = true;
